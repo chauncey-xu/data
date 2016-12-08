@@ -47,23 +47,23 @@ def whois(host):
 
 
 def excel(result):
-    
+
 #    keys = ["Host", "NetRange", "NetName", "OrgName", "Country","OrgAbuseEmail","RTechEmail"]    #建立'keys'列表,赋值为所有需要的信息
     keys = ["Host", "NetRange", "NetName", "Organization", "Country","OrgTechEmail","RTechEmail"]    #建立'keys'列表,赋值为所有需要的信息
 
-    file = open("whois_result.csv", "w")    #打开 CSV 文件;
+    file = open("/home/netpas/xcq/web_server/Arin_result.csv", "w")    #打开 CSV 文件;
     file.write(",".join(keys) + "\n")       #将 keys 中的所有信息,输入到第一行中;
     for result in result_list:
         result['Organization'] = result['Organization'].replace(',','|',10)
         line = ""
         for key in keys:
             line += result.get(key, "") + ","
-            
+
         file.write(line + "\n")
 
     file.close()
 
-    return 
+    return
 
 if __name__ == "__main__":
 
@@ -78,6 +78,6 @@ if __name__ == "__main__":
             print (result,'/////')
 #            pass
         else:
-            result["Host"] = host          #将'host' 内容赋值到 result 列表的 'host' 中;        
+            result["Host"] = host          #将'host' 内容赋值到 result 列表的 'host' 中;
             result_list.append(result)     #将 result 中的信息追加到'result_list'列表中;
             excel(result)                  #调用 excel 函数，将结果追加到 CSV 文件中;
